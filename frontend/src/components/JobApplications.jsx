@@ -3,12 +3,18 @@ import { getApplications } from "../api/jobApi";
 
 function JobApplications({ jobId }) {
   const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getApplications(jobId)
       .then(res => setApplications(res.data))
-      .catch(err => console.error(err));
+      .catch(() => setError("Failed to load applications"))
+      .finally(() => setLoading(false));
   }, [jobId]);
+
+  if (loading) return <p>Loading applications...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
     <div>

@@ -7,7 +7,7 @@ function App() {
   const [selectedJobId, setSelectedJobId] = useState(null);
 
   return (
-    <div>
+    <div className="container">
       <h1>Mini Job Portal</h1>
 
       <JobList onSelectJob={setSelectedJobId} />
