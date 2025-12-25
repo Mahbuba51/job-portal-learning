@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { getJobs } from "../api/jobApi";
 
 function JobList({ onSelectJob }) {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/jobs")
-      .then(res => res.json())
-      .then(data => setJobs(data));
+    getJobs()
+      .then(res => setJobs(res.data))
+      .catch(err => console.error(err));
   }, []);
 
   return (

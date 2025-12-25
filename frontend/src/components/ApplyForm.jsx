@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { applyToJob } from "../api/jobApi";
 
 function ApplyForm({ jobId }) {
   const [name, setName] = useState("");
@@ -7,20 +8,19 @@ function ApplyForm({ jobId }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch(`http://localhost:8080/api/jobs/${jobId}/apply`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        applicantName: name,
-        email: email
+    applyToJob(jobId, {
+      applicantName: name,
+      email: email
+    })
+      .then(() => {
+        alert("Applied successfully!");
+        setName("");
+        setEmail("");
       })
-    }).then(() => {
-      setName("");
-      setEmail("");
-      alert("Applied successfully!");
-    });
+      .catch(err => {
+        console.error(err);
+        alert("Failed to apply");
+      });
   }
 
   return (
