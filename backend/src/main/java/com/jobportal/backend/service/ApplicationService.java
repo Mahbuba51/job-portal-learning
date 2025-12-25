@@ -17,7 +17,7 @@ public class ApplicationService {
     }
 
     public Application saveApplication(ApplicationRequest application) {
-        System.out.println(application);
+        // System.out.println(application);
         Application app = new Application();
         app.setApplicantName(application.applicantName());
         app.setEmail(application.applicantEmail());
@@ -26,6 +26,7 @@ public class ApplicationService {
     }
 
     public List<ApplicationRequest> findByJobId(Long jobId) {
+        System.out.println(applicationRepository.findByJobId(jobId));
         return applicationRepository.findByJobId(jobId)
                 .stream()
                 .map(app -> new ApplicationRequest(app.getApplicantName(), app.getEmail()))

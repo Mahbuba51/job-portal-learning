@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getJobs } from "../api/jobApi";
+console.log("API URL Name:", import.meta.env.VITE_API_URL);
 
 function JobList({ onSelectJob }) {
   const [jobs, setJobs] = useState([]);

@@ -16,6 +16,8 @@ function JobApplications({ jobId }) {
   if (loading) return <p>Loading applications...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
+  console.log("Applications:", applications);
+
   return (
     <div>
       <h3>Applications</h3>
